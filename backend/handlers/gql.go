@@ -2,10 +2,10 @@ package handlers
 
 import (
 	"github.com/99designs/gqlgen/handler"
-	"github.com/cmelgarejo/go-gql-server/internal/gql"
-	"github.com/cmelgarejo/go-gql-server/internal/gql/resolvers"
-	"github.com/cmelgarejo/go-gql-server/internal/orm"
 	"github.com/gin-gonic/gin"
+	"heritage/backend/gql"
+	"heritage/backend/gql/resolvers"
+	"heritage/backend/orm"
 )
 
 // GraphqlHandler defines the GQLGen GraphQL server handler

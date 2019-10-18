@@ -4,7 +4,7 @@ import (
 	"os"
 	"strconv"
 
-	log "github.com/cmelgarejo/go-gql-server/internal/logger"
+	log "heritage/backend/logger"
 )
 
 // MustGet will return the env or panic if it is not present

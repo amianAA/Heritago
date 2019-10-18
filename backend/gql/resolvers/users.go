@@ -3,11 +3,11 @@ package resolvers
 import (
 	"context"
 
-	log "github.com/cmelgarejo/go-gql-server/internal/logger"
+	log "heritage/backend/logger"
 
-	"github.com/cmelgarejo/go-gql-server/internal/gql/models"
-	tf "github.com/cmelgarejo/go-gql-server/internal/gql/resolvers/transformations"
-	dbm "github.com/cmelgarejo/go-gql-server/internal/orm/models"
+	"heritage/backend/gql/models"
+	tf "heritage/backend/gql/resolvers/transformations"
+	dbm "heritage/backend/orm/models"
 )
 
 // CreateUser creates a record

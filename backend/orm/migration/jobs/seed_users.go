@@ -1,10 +1,10 @@
 package jobs
 
 import (
-	"github.com/cmelgarejo/go-gql-server/internal/orm/models"
 	"github.com/jinzhu/gorm"
 	"gopkg.in/gormigrate.v1"
-)
+	"heritage/backend/orm/models"
+	)
 
 var (
 	uname                    = "Test User"

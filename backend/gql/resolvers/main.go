@@ -1,8 +1,8 @@
 package resolvers
 
 import (
-	"github.com/cmelgarejo/go-gql-server/internal/gql"
-	"github.com/cmelgarejo/go-gql-server/internal/orm"
+	"heritage/backend/gql"
+	"heritage/backend/orm"
 )
 
 // Resolver is a modifable struct that can be used to pass on properties used

@@ -1,13 +1,11 @@
 package server
 
 import (
-	log "github.com/cmelgarejo/go-gql-server/internal/logger"
-
-	"github.com/cmelgarejo/go-gql-server/internal/orm"
-
-	"github.com/cmelgarejo/go-gql-server/internal/handlers"
-	"github.com/cmelgarejo/go-gql-server/pkg/utils"
 	"github.com/gin-gonic/gin"
+	"heritage/backend/handlers"
+	log "heritage/backend/logger"
+	"heritage/backend/orm"
+	"heritage/backend/utils"
 )
 
 var host, port, gqlPath, gqlPgPath string

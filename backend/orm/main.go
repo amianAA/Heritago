@@ -3,15 +3,11 @@
 package orm
 
 import (
-	log "github.com/cmelgarejo/go-gql-server/internal/logger"
-
-	"github.com/cmelgarejo/go-gql-server/internal/orm/migration"
-
-	"github.com/cmelgarejo/go-gql-server/pkg/utils"
-	//Imports the database dialect of choice
-	_ "github.com/jinzhu/gorm/dialects/postgres"
-
 	"github.com/jinzhu/gorm"
+	_ "github.com/jinzhu/gorm/dialects/postgres"
+	log "heritage/backend/logger"
+	"heritage/backend/orm/migration"
+	"heritage/backend/utils"
 )
 
 var autoMigrate, logMode, seedDB bool

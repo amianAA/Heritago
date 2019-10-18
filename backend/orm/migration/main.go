@@ -3,12 +3,12 @@ package migration
 import (
 	"fmt"
 
-	log "github.com/cmelgarejo/go-gql-server/internal/logger"
+	log "heritage/backend/logger"
 
-	"github.com/cmelgarejo/go-gql-server/internal/orm/migration/jobs"
-	"github.com/cmelgarejo/go-gql-server/internal/orm/models"
 	"github.com/jinzhu/gorm"
 	"gopkg.in/gormigrate.v1"
+	"heritage/backend/orm/migration/jobs"
+	"heritage/backend/orm/models"
 )
 
 func updateMigration(db *gorm.DB) error {

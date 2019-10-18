@@ -3,9 +3,9 @@ package transformations
 import (
 	"errors"
 
-	gql "github.com/cmelgarejo/go-gql-server/internal/gql/models"
-	dbm "github.com/cmelgarejo/go-gql-server/internal/orm/models"
 	"github.com/gofrs/uuid"
+	gql "heritage/backend/gql/models"
+	dbm "heritage/backend/orm/models"
 )
 
 // DBUserToGQLUser transforms [user] db input to gql type

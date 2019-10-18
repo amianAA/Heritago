@@ -5,7 +5,7 @@ printf "\nRegenerating gqlgen files\n"
 # doesn't impact the resolvers definitions, no need to do it
 while [[ "$#" -gt 0 ]]; do case $1 in
   -r|--resolvers)
-    rm -f internal/gql/resolvers/generated/resolver.go
+    rm -f backend/gql/resolvers/generated/resolver.go
   ;;
   *) echo "Unknown parameter passed: $1"; exit 1;;
 esac; shift; done
