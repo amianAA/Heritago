@@ -5,9 +5,9 @@ package orm
 import (
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/postgres"
-	log "heritage/backend/logger"
-	"heritage/backend/orm/migration"
-	"heritage/backend/utils"
+	log "heritago/backend/logger"
+	"heritago/backend/orm/migration"
+	"heritago/backend/utils"
 )
 
 var autoMigrate, logMode, seedDB bool

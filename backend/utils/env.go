@@ -4,7 +4,7 @@ import (
 	"os"
 	"strconv"
 
-	log "heritage/backend/logger"
+	log "heritago/backend/logger"
 )
 
 // MustGet will return the env or panic if it is not present

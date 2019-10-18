@@ -3,9 +3,9 @@ package handlers
 import (
 	"github.com/99designs/gqlgen/handler"
 	"github.com/gin-gonic/gin"
-	"heritage/backend/gql"
-	"heritage/backend/gql/resolvers"
-	"heritage/backend/orm"
+	"heritago/backend/gql"
+	"heritago/backend/gql/resolvers"
+	"heritago/backend/orm"
 )
 
 // GraphqlHandler defines the GQLGen GraphQL server handler

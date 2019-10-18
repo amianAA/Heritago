@@ -3,7 +3,7 @@ package jobs
 import (
 	"github.com/jinzhu/gorm"
 	"gopkg.in/gormigrate.v1"
-	"heritage/backend/orm/models"
+	"heritago/backend/orm/models"
 	)
 
 var (

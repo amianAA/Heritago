@@ -3,11 +3,11 @@ package resolvers
 import (
 	"context"
 
-	log "heritage/backend/logger"
+	log "heritago/backend/logger"
 
-	"heritage/backend/gql/models"
-	tf "heritage/backend/gql/resolvers/transformations"
-	dbm "heritage/backend/orm/models"
+	"heritago/backend/gql/models"
+	tf "heritago/backend/gql/resolvers/transformations"
+	dbm "heritago/backend/orm/models"
 )
 
 // CreateUser creates a record

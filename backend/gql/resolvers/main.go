@@ -1,8 +1,8 @@
 package resolvers
 
 import (
-	"heritage/backend/gql"
-	"heritage/backend/orm"
+	"heritago/backend/gql"
+	"heritago/backend/orm"
 )
 
 // Resolver is a modifable struct that can be used to pass on properties used

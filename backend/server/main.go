@@ -2,10 +2,10 @@ package server
 
 import (
 	"github.com/gin-gonic/gin"
-	"heritage/backend/handlers"
-	log "heritage/backend/logger"
-	"heritage/backend/orm"
-	"heritage/backend/utils"
+	"heritago/backend/handlers"
+	log "heritago/backend/logger"
+	"heritago/backend/orm"
+	"heritago/backend/utils"
 )
 
 var host, port, gqlPath, gqlPgPath string

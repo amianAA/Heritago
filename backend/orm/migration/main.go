@@ -3,12 +3,12 @@ package migration
 import (
 	"fmt"
 
-	log "heritage/backend/logger"
+	log "heritago/backend/logger"
 
 	"github.com/jinzhu/gorm"
 	"gopkg.in/gormigrate.v1"
-	"heritage/backend/orm/migration/jobs"
-	"heritage/backend/orm/models"
+	"heritago/backend/orm/migration/jobs"
+	"heritago/backend/orm/models"
 )
 
 func updateMigration(db *gorm.DB) error {

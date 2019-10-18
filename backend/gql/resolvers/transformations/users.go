@@ -4,8 +4,8 @@ import (
 	"errors"
 
 	"github.com/gofrs/uuid"
-	gql "heritage/backend/gql/models"
-	dbm "heritage/backend/orm/models"
+	gql "heritago/backend/gql/models"
+	dbm "heritago/backend/orm/models"
 )
 
 // DBUserToGQLUser transforms [user] db input to gql type

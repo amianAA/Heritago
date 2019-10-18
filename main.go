@@ -1,9 +1,9 @@
 package main
 
 import (
-	log "heritage/backend/logger"
-	"heritage/backend/orm"
-	"heritage/backend/server"
+	log "heritago/backend/logger"
+	"heritago/backend/orm"
+	"heritago/backend/server"
 )
 
 func main() {
