@@ -17,6 +17,11 @@ type User struct {
 	UpdatedAt *time.Time `json:"updatedAt"`
 }
 
+type UserAuth struct {
+	Logged bool   `json:"logged"`
+	Token  string `json:"token"`
+}
+
 type UserInput struct {
 	Email     *string `json:"email"`
 	Password  *string `json:"password"`

@@ -27,11 +27,12 @@ func DBUserToGQLUser(i *dbm.User) (o *gql.User, err error) {
 // GQLInputUserToDBUser transforms [user] gql input to db model
 func GQLInputUserToDBUser(i *gql.UserInput, update bool, ids ...string) (o *dbm.User, err error) {
 	userID := strings.ToLower((*i.FirstName)[:1] + *i.LastName)
+	hashedPassword := dbm.HashAndSaltPwd(i.Password)
 
 	o = &dbm.User{
 		UserID:    &userID,
 		Email:     *i.Email,
-		Password:  i.Password,
+		Password:  &hashedPassword,
 		FirstName: i.FirstName,
 		LastName:  i.LastName,
 		Country:   i.Country,

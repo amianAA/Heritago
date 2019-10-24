@@ -11,6 +11,17 @@ type User {
   updatedAt: Time
 }
 
+type UserAuth {
+  logged: Boolean!
+  token: String!
+}
+
+# List Types
+type Users {
+  count: Int
+  list: [User!]!
+}
+
 # Input Types
 input UserInput {
   email: String
@@ -18,12 +29,6 @@ input UserInput {
   firstName: String
   lastName: String
   country: String
-}
-
-# List Types
-type Users {
-  count: Int
-  list: [User!]!
 }
 
 # Define mutations here
@@ -36,4 +41,5 @@ type Mutation {
 # Define queries here
 type Query {
   users(id: ID): Users!
+  userAuth(email: String, password: String): UserAuth!
 }

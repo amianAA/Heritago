@@ -11,7 +11,8 @@ var (
 	fname    = "Alvaro"
 	lname    = "Amian"
 	country  = "Spain"
-	password = models.HashAndSaltPwd("0987654321")
+	rawPass  = "0987654321"
+	password = models.HashAndSaltPwd(&rawPass)
 	userID   = strings.ToLower(fname[:1] + lname)
 
 	firstUser = &models.User{

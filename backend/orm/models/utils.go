@@ -5,9 +5,9 @@ import (
 	"log"
 )
 
-func HashAndSaltPwd(pwd string) string {
+func HashAndSaltPwd(pwd *string) string {
 
-    hash, err := bcrypt.GenerateFromPassword([]byte(pwd), bcrypt.MinCost)
+    hash, err := bcrypt.GenerateFromPassword([]byte(*pwd), bcrypt.MinCost)
     if err != nil {
         log.Println(err)
     }    // GenerateFromPassword returns a byte slice so we need to
@@ -15,9 +15,10 @@ func HashAndSaltPwd(pwd string) string {
     return string(hash)
 }
 
-func ComparePasswords(hashedPwd string, plainPwd []byte) bool {
-    byteHash := []byte(hashedPwd)
-    err := bcrypt.CompareHashAndPassword(byteHash, plainPwd)
+func ComparePasswords(hashedPwd *string, plainPwd *string) bool {
+    byteHash := []byte(*hashedPwd)
+    bytePwd := []byte(*plainPwd)
+    err := bcrypt.CompareHashAndPassword(byteHash, bytePwd)
     if err != nil {
         log.Println(err)
         return false

@@ -30,6 +30,10 @@ func (r *queryResolver) Users(ctx context.Context, id *string) (*models.Users, e
 	return userList(r, id)
 }
 
+func (r *queryResolver) UserAuth(ctx context.Context, email *string, password *string) (*models.UserAuth, error) {
+	return userAuth(r, email, password)
+}
+
 // ## Helper functions
 
 func userCreateUpdate(r *mutationResolver, input models.UserInput, update bool, ids ...string) (*models.User, error) {
@@ -75,4 +79,24 @@ func userList(r *queryResolver, id *string) (*models.Users, error) {
 		}
 	}
 	return record, db.Error
+}
+
+func userAuth(r *queryResolver, email *string, password *string) (*models.UserAuth, error) {
+	whereID := "email = ?"
+	response := &models.UserAuth{}
+	db := r.ORM.DB.New()
+	dbUser := &dbm.User{}
+	if email != nil {
+		db = db.Where(whereID, *email).First(dbUser)
+	}
+	userPass := dbUser.Password
+	logged := dbm.ComparePasswords(userPass, password)
+	response.Logged = logged
+	if logged == true {
+		response.Token = "Hello my friend!"
+	} else {
+		response.Token = "You shall not pass!"
+	}
+
+	return response, db.Error
 }
