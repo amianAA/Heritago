@@ -25,9 +25,4 @@ else
     docker run --name ${APP} -e POSTGRES_PASSWORD=${APP} -d -p 5432:5432 postgres
 fi
 
-# TASK
-printf "\nStart app: ${APP}\n"
-export $(grep -v '^#' ../environment/${ENV}/.env | xargs)
-time ../${PROGRAM}
-unset $(grep -v '^#' ../environment/${ENV}/.env | sed -r 's/(.*)=.*/\1/' | xargs)
-printf "\nStopped app: ${APP}\n\n"
+printf "\n'${APP} Database is running now'...\n"

@@ -4,12 +4,9 @@ type User {
   id: ID!
   email: String!
   userId: String
-  name: String
   firstName: String
   lastName: String
-  nickName: String
-  description: String
-  location: String
+  country: String
   createdAt: Time!
   updatedAt: Time
 }
@@ -17,14 +14,10 @@ type User {
 # Input Types
 input UserInput {
   email: String
-  userId: String
-  displayName: String
-  name: String
+  password: String
   firstName: String
   lastName: String
-  nickName: String
-  description: String
-  location: String
+  country: String
 }
 
 # List Types
