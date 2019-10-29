@@ -51,8 +51,8 @@ type ComplexityRoot struct {
 	}
 
 	Query struct {
-		UserAuth func(childComplexity int, email *string, password *string) int
-		Users    func(childComplexity int, id *string) int
+		UserLogin func(childComplexity int, email *string, password *string) int
+		Users     func(childComplexity int, id *string) int
 	}
 
 	User struct {
@@ -67,6 +67,7 @@ type ComplexityRoot struct {
 	}
 
 	UserAuth struct {
+		Error  func(childComplexity int) int
 		Logged func(childComplexity int) int
 		Token  func(childComplexity int) int
 	}
@@ -84,7 +85,7 @@ type MutationResolver interface {
 }
 type QueryResolver interface {
 	Users(ctx context.Context, id *string) (*models.Users, error)
-	UserAuth(ctx context.Context, email *string, password *string) (*models.UserAuth, error)
+	UserLogin(ctx context.Context, email *string, password *string) (*models.UserAuth, error)
 }
 
 type executableSchema struct {
@@ -138,17 +139,17 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 
 		return e.complexity.Mutation.UpdateUser(childComplexity, args["id"].(string), args["input"].(models.UserInput)), true
 
-	case "Query.userAuth":
-		if e.complexity.Query.UserAuth == nil {
+	case "Query.userLogin":
+		if e.complexity.Query.UserLogin == nil {
 			break
 		}
 
-		args, err := ec.field_Query_userAuth_args(context.TODO(), rawArgs)
+		args, err := ec.field_Query_userLogin_args(context.TODO(), rawArgs)
 		if err != nil {
 			return 0, false
 		}
 
-		return e.complexity.Query.UserAuth(childComplexity, args["email"].(*string), args["password"].(*string)), true
+		return e.complexity.Query.UserLogin(childComplexity, args["email"].(*string), args["password"].(*string)), true
 
 	case "Query.users":
 		if e.complexity.Query.Users == nil {
@@ -217,6 +218,13 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 		}
 
 		return e.complexity.User.UserID(childComplexity), true
+
+	case "UserAuth.error":
+		if e.complexity.UserAuth.Error == nil {
+			break
+		}
+
+		return e.complexity.UserAuth.Error(childComplexity), true
 
 	case "UserAuth.logged":
 		if e.complexity.UserAuth.Logged == nil {
@@ -324,6 +332,7 @@ type User {
 type UserAuth {
   logged: Boolean!
   token: String!
+  error: String
 }
 
 # List Types
@@ -351,7 +360,7 @@ type Mutation {
 # Define queries here
 type Query {
   users(id: ID): Users!
-  userAuth(email: String, password: String): UserAuth!
+  userLogin(email: String, password: String): UserAuth!
 }
 `},
 )
@@ -424,7 +433,7 @@ func (ec *executionContext) field_Query___type_args(ctx context.Context, rawArgs
 	return args, nil
 }
 
-func (ec *executionContext) field_Query_userAuth_args(ctx context.Context, rawArgs map[string]interface{}) (map[string]interface{}, error) {
+func (ec *executionContext) field_Query_userLogin_args(ctx context.Context, rawArgs map[string]interface{}) (map[string]interface{}, error) {
 	var err error
 	args := map[string]interface{}{}
 	var arg0 *string
@@ -672,7 +681,7 @@ func (ec *executionContext) _Query_users(ctx context.Context, field graphql.Coll
 	return ec.marshalNUsers2ᚖheritagoᚋbackendᚋgqlᚋmodelsᚐUsers(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _Query_userAuth(ctx context.Context, field graphql.CollectedField) (ret graphql.Marshaler) {
+func (ec *executionContext) _Query_userLogin(ctx context.Context, field graphql.CollectedField) (ret graphql.Marshaler) {
 	ctx = ec.Tracer.StartFieldExecution(ctx, field)
 	defer func() {
 		if r := recover(); r != nil {
@@ -689,7 +698,7 @@ func (ec *executionContext) _Query_userAuth(ctx context.Context, field graphql.C
 	}
 	ctx = graphql.WithResolverContext(ctx, rctx)
 	rawArgs := field.ArgumentMap(ec.Variables)
-	args, err := ec.field_Query_userAuth_args(ctx, rawArgs)
+	args, err := ec.field_Query_userLogin_args(ctx, rawArgs)
 	if err != nil {
 		ec.Error(ctx, err)
 		return graphql.Null
@@ -698,7 +707,7 @@ func (ec *executionContext) _Query_userAuth(ctx context.Context, field graphql.C
 	ctx = ec.Tracer.StartFieldResolverExecution(ctx, rctx)
 	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
 		ctx = rctx // use context from middleware stack in children
-		return ec.resolvers.Query().UserAuth(rctx, args["email"].(*string), args["password"].(*string))
+		return ec.resolvers.Query().UserLogin(rctx, args["email"].(*string), args["password"].(*string))
 	})
 	if err != nil {
 		ec.Error(ctx, err)
@@ -1144,6 +1153,40 @@ func (ec *executionContext) _UserAuth_token(ctx context.Context, field graphql.C
 	rctx.Result = res
 	ctx = ec.Tracer.StartFieldChildExecution(ctx)
 	return ec.marshalNString2string(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) _UserAuth_error(ctx context.Context, field graphql.CollectedField, obj *models.UserAuth) (ret graphql.Marshaler) {
+	ctx = ec.Tracer.StartFieldExecution(ctx, field)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+		ec.Tracer.EndFieldExecution(ctx)
+	}()
+	rctx := &graphql.ResolverContext{
+		Object:   "UserAuth",
+		Field:    field,
+		Args:     nil,
+		IsMethod: false,
+	}
+	ctx = graphql.WithResolverContext(ctx, rctx)
+	ctx = ec.Tracer.StartFieldResolverExecution(ctx, rctx)
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Error, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		return graphql.Null
+	}
+	res := resTmp.(*string)
+	rctx.Result = res
+	ctx = ec.Tracer.StartFieldChildExecution(ctx)
+	return ec.marshalOString2ᚖstring(ctx, field.Selections, res)
 }
 
 func (ec *executionContext) _Users_count(ctx context.Context, field graphql.CollectedField, obj *models.Users) (ret graphql.Marshaler) {
@@ -2488,7 +2531,7 @@ func (ec *executionContext) _Query(ctx context.Context, sel ast.SelectionSet) gr
 				}
 				return res
 			})
-		case "userAuth":
+		case "userLogin":
 			field := field
 			out.Concurrently(i, func() (res graphql.Marshaler) {
 				defer func() {
@@ -2496,7 +2539,7 @@ func (ec *executionContext) _Query(ctx context.Context, sel ast.SelectionSet) gr
 						ec.Error(ctx, ec.Recover(ctx, r))
 					}
 				}()
-				res = ec._Query_userAuth(ctx, field)
+				res = ec._Query_userLogin(ctx, field)
 				if res == graphql.Null {
 					atomic.AddUint32(&invalids, 1)
 				}
@@ -2585,6 +2628,8 @@ func (ec *executionContext) _UserAuth(ctx context.Context, sel ast.SelectionSet,
 			if out.Values[i] == graphql.Null {
 				invalids++
 			}
+		case "error":
+			out.Values[i] = ec._UserAuth_error(ctx, field, obj)
 		default:
 			panic("unknown field " + strconv.Quote(field.Name))
 		}

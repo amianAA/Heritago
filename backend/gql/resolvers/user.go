@@ -2,6 +2,8 @@ package resolvers
 
 import (
 	"context"
+	jwtauth "heritago/backend/server/auth"
+	"time"
 
 	log "heritago/backend/logger"
 
@@ -30,8 +32,8 @@ func (r *queryResolver) Users(ctx context.Context, id *string) (*models.Users, e
 	return userList(r, id)
 }
 
-func (r *queryResolver) UserAuth(ctx context.Context, email *string, password *string) (*models.UserAuth, error) {
-	return userAuth(r, email, password)
+func (r *queryResolver) UserLogin(ctx context.Context, email *string, password *string) (*models.UserAuth, error) {
+	return userLogin(r, email, password)
 }
 
 // ## Helper functions
@@ -81,21 +83,28 @@ func userList(r *queryResolver, id *string) (*models.Users, error) {
 	return record, db.Error
 }
 
-func userAuth(r *queryResolver, email *string, password *string) (*models.UserAuth, error) {
+func userLogin(r *queryResolver, email *string, password *string) (*models.UserAuth, error) {
 	whereID := "email = ?"
 	response := &models.UserAuth{}
+	wrongLoginMsg := "User does not exists or password does not match."
 	db := r.ORM.DB.New()
 	dbUser := &dbm.User{}
 	if email != nil {
 		db = db.Where(whereID, *email).First(dbUser)
 	}
+	if dbUser.UserID == nil {
+		response.Error = &wrongLoginMsg
+		response.Logged = false
+		return response, nil
+	}
 	userPass := dbUser.Password
 	logged := dbm.ComparePasswords(userPass, password)
 	response.Logged = logged
+	expiredAt := time.Now().Add(time.Hour * 1).Unix()
 	if logged == true {
-		response.Token = "Hello my friend!"
+		response.Token = jwtauth.JwtCreate(*dbUser.UserID, expiredAt)
 	} else {
-		response.Token = "You shall not pass!"
+		response.Error = &wrongLoginMsg
 	}
 
 	return response, db.Error

@@ -18,8 +18,9 @@ type User struct {
 }
 
 type UserAuth struct {
-	Logged bool   `json:"logged"`
-	Token  string `json:"token"`
+	Logged bool    `json:"logged"`
+	Token  string  `json:"token"`
+	Error  *string `json:"error"`
 }
 
 type UserInput struct {

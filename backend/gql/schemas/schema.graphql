@@ -14,6 +14,7 @@ type User {
 type UserAuth {
   logged: Boolean!
   token: String!
+  error: String
 }
 
 # List Types
@@ -41,5 +42,5 @@ type Mutation {
 # Define queries here
 type Query {
   users(id: ID): Users!
-  userAuth(email: String, password: String): UserAuth!
+  userLogin(email: String, password: String): UserAuth!
 }

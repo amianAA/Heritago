@@ -28,9 +28,9 @@ func Run(orm *orm.ORM) {
 	r := gin.Default()
 	// Handlers
 	// Simple keep-alive/ping handler
-	r.POST("/auth", handlers.UserAuth(orm))
 	r.GET("/ping", handlers.Ping())
 
+	// TODO Add JWT AUTH : r.Use(jwtauth.JWTMiddleware())
 	// GraphQL handlers
 	// Playground handler
 	if isPgEnabled {
