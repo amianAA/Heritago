@@ -8,15 +8,15 @@ import (
 )
 
 var (
-	fname    = "Alvaro"
-	lname    = "Amian"
+	fname    = "FirstName"
+	lname    = "LastName"
 	country  = "Spain"
 	rawPass  = "0987654321"
 	password = models.HashAndSaltPwd(&rawPass)
 	userID   = strings.ToLower(fname[:1] + lname)
 
 	firstUser = &models.User{
-		Email:     "amianalvaro@gmail.com",
+		Email:     "test@gmail.com",
 		UserID:    &userID,
 		FirstName: &fname,
 		LastName:  &lname,
